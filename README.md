@@ -32,7 +32,6 @@ cd person-register-python
 
 (Optional) Create and activate a virtual environment:
 ```bash
-pip install venv
 python3 -m venv .venv
 source .venv/bin/activate # On Windows: .venv\Scripts\activate
 ```

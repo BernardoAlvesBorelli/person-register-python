@@ -30,14 +30,14 @@ git clone https://github.com/BernardoAlvesBorelli/person-register-python.git
 cd person-register-python
 ```
 
-```bash
 (Optional) Create and activate a virtual environment:
+```bash
 pip install venv
 python3 -m venv .venv
 source .venv/bin/activate # On Windows: .venv\Scripts\activate
 ```
 
-```bash
 Run project:
+```bash
 python3 main.py
 ```

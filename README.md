@@ -37,7 +37,12 @@ python3 -m venv .venv
 source .venv/bin/activate # On Windows: .venv\Scripts\activate
 ```
 
+Install requirements:
+```bash
+.venv/bin/python -m pip install -r requirements.txt # On Windows use: .venv\Scripts\python.exe -m pip install -r requirements.txt
+```
+
 Run project:
 ```bash
-python3 main.py
+.venv/bin/python main.py # On Windows use: .venv\Scripts\python.exe main.py
 ```

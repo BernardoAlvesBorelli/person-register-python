@@ -12,8 +12,10 @@
 
 
 import register
+import datetime
+from dateutil.relativedelta import relativedelta
 
-def ol(*li):
+def opt_menu(*li):
     for index, item in enumerate(li):
         print(f"{index+1}: {item}")
 
@@ -21,14 +23,14 @@ def read_string(msg):
     while True:
         valor = input(msg).strip()
         if not valor:
-            print("\033[31mERROR! Empty input!\033[m")
+            print("\033[31mERROR! Input cannot be empty!\033[m")
             continue
 
         correct = ' '.join(p.capitalize() for p in valor.split())
         if valor != correct:
             print("\033[33mWARNING! Names should start with uppercase letters.\033[m")
             print(f"\033[36mSuggested: {correct}\033[m")
-            resp = input("Use the suggested version? (Y/N): ").strip().lower()
+            resp = input("Use the suggested version? (y/n): ").strip().lower()
             if resp == "y":
                 return correct
             elif resp == "n":
@@ -44,7 +46,7 @@ def read_int(msg):
         try:
             return int(input(msg))
         except ValueError:
-            print("\033[31mERROR! Write only numbers!\033[m")
+            print("\033[31mERROR! Please enter numbers only!\033[m")
             continue
 
 def read_options(msg, *valid_options):
@@ -54,10 +56,28 @@ def read_options(msg, *valid_options):
             if option in valid_options:
                 return option
             else:
-                print("\033[31mERROR! Invalid Option!\033[m")
+                print("\033[31mERROR! Invalid option!\033[m")
         except ValueError:
-            print("\033[31mERROR! Write only numbers!\033[m")
+            print("\033[31mERROR! Please enter numbers only!\033[m")
             continue
+
+def read_birthdate(msg):
+    while True:
+        dt = str(input(msg))
+        try:
+            birth_date = datetime.datetime.strptime(dt, "%Y-%m-%d").date()
+        except ValueError:
+            print("\033[31mERROR! The date format in invalid or this day does not exists!\033[m")
+            continue
+        else:
+            today = datetime.date.today()
+            min_date = today - relativedelta(years=120)
+            if birth_date < min_date:
+                print("\033[31mERROR! Age must be less than 120!\033[m")
+            elif birth_date > today: 
+                print("\033[31mERROR! The date entered is in the future!\033[m")
+            else:
+                return birth_date
 
 print("="*30)
 print(f"{'PERSON':<10}{'REGISTER':^10}{'PYTHON':>10}")
@@ -65,15 +85,15 @@ print("AUTHOR: Bernardo Alves Borelli")
 print("="*30)
 
 while True:
-    ol("List people", "Register person", "Delete person", "Exit system")
-    opt = read_options("Write a option: ", 1, 2, 3, 4)
+    opt_menu("List people", "Register person", "Delete person", "Exit system")
+    opt = read_options("Enter an option: ", 1, 2, 3, 4)
     match opt:
         case 1:
             register.list_people()
         case 2:
-            name = read_string("Write person name: ")
-            ol("Male", "Female", "Other/Non Binary")
-            opt_gender = read_options("Write person gender: ", 1, 2, 3)
+            name = read_string("Enter person’s name: ")
+            opt_menu("Male", "Female", "Other/Non Binary")
+            opt_gender = read_options("Enter person’s gender: ", 1, 2, 3)
             match opt_gender:
                 case 1:
                     gender = "Male"
@@ -81,11 +101,11 @@ while True:
                     gender = "Female"
                 case 3:
                     gender = "Other"
-            age = read_int("Write person age: ")
-            register.register_person(name, gender, age)
+            birth_date = read_birthdate("Enter person’s birth date (YYYY-MM-DD): ")
+            register.register_person(name, gender, birth_date)
         case 3:
-            id = read_int("Write the person id: ")
+            id = read_int("Write the person’s id: ")
             register.delete_person(id)
         case 4:
-            print("Exiting system...")
+            print("Exiting system... Goodbye!")
             break

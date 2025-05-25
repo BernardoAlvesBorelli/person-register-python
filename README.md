@@ -6,7 +6,7 @@ The project currently works via the command-line interface (CLI), but I may adap
 
 ## 📸 Demonstration
 
-![Screenshot of the system functionalities](https://drive.google.com/uc?id=1JsiP186gStdR1XYXPkU0gRV88LpaSJ3E)
+![Screenshot of the system functionalities](https://drive.google.com/uc?id=1GrPOG0AeACzy70wBmtI56OM9xbi9_rRR)
 
 ## ✅ Features
 

@@ -65,7 +65,7 @@ print("AUTHOR: Bernardo Alves Borelli")
 print("="*30)
 
 while True:
-    ol("List people", "Register people", "Delete person", "Exit system")
+    ol("List people", "Register persor", "Delete person", "Exit system")
     opt = read_options("Write a option: ", 1, 2, 3, 4)
     match opt:
         case 1:
